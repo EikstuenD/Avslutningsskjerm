@@ -70,7 +70,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      gap: 8px;
+      gap: 6px;
       max-width: 520px;
     }
 
@@ -193,7 +193,7 @@
     .right-grid {
       min-height: 0;
       display: grid;
-      grid-template-rows: auto auto 1fr;
+      grid-template-rows: auto minmax(150px, 0.45fr) 1fr;
       gap: clamp(10px, 1vw, 14px);
     }
 
@@ -203,6 +203,20 @@
       line-height: 1;
     }
 
+    .mode-card {
+      padding: clamp(8px, 0.8vw, 14px);
+    }
+
+    .mode-card h2 {
+      font-size: clamp(0.85rem, 1vw, 1.05rem);
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+
+    .message-card h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.8rem);
+    }
+
     .modes {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -210,36 +224,40 @@
     }
 
     .mode-btn {
-      border-radius: 18px;
-      padding: 12px 10px;
+      border-radius: 14px;
+      padding: 7px 8px;
       text-align: center;
-      min-height: 62px;
+      min-height: 42px;
+      box-shadow: none;
     }
 
     .mode-btn strong {
       display: block;
-      font-size: clamp(0.9rem, 1vw, 1.05rem);
-      margin-bottom: 2px;
+      font-size: clamp(0.75rem, 0.85vw, 0.92rem);
+      margin-bottom: 0;
       white-space: nowrap;
     }
 
     .mode-btn span {
       color: var(--muted);
-      font-size: clamp(0.75rem, 0.85vw, 0.9rem);
+      font-size: clamp(0.65rem, 0.72vw, 0.78rem);
     }
 
     textarea {
       width: 100%;
-      min-height: 96px;
-      max-height: 120px;
+      height: 100%;
+      min-height: 150px;
+      max-height: none;
       border: 0;
       border-radius: 16px;
       padding: 12px 14px;
       color: var(--text);
       background: rgba(0, 0, 0, 0.18);
       resize: none;
+      font-weight: 800;
+      line-height: 1.2;
       outline: 2px solid transparent;
-      font-size: clamp(0.9rem, 1vw, 1.05rem);
+      font-size: clamp(1.4rem, 2.1vw, 2.4rem);
     }
 
     textarea:focus {
