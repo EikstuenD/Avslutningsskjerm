@@ -193,7 +193,7 @@
     .right-grid {
       min-height: 0;
       display: grid;
-      grid-template-rows: auto minmax(150px, 0.45fr) 1fr;
+      grid-template-rows: auto 210px 1fr;
       gap: clamp(10px, 1vw, 14px);
     }
 
@@ -213,8 +213,15 @@
       color: var(--muted);
     }
 
+    .message-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
     .message-card h2 {
       font-size: clamp(1.6rem, 2.5vw, 2.8rem);
+      flex: 0 0 auto;
     }
 
     .modes {
@@ -245,9 +252,10 @@
 
     textarea {
       width: 100%;
-      height: 100%;
-      min-height: 150px;
-      max-height: none;
+      flex: 1 1 auto;
+      min-height: 0;
+      height: auto;
+      max-height: 100%;
       border: 0;
       border-radius: 16px;
       padding: 12px 14px;
