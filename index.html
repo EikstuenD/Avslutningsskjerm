@@ -639,6 +639,9 @@
     });
 
     document.addEventListener("keydown", (event) => {
+      const skriverIBeskjedfelt = event.target === messageInput;
+      if (skriverIBeskjedfelt) return;
+
       if (event.code === "Space") {
         event.preventDefault();
         intervalId ? pauseTimer() : startTimer();
