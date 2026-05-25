@@ -205,7 +205,7 @@
 
     .modes {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -228,17 +228,10 @@
       font-size: clamp(0.75rem, 0.85vw, 0.9rem);
     }
 
-    .message-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      align-items: stretch;
-    }
-
     textarea {
       width: 100%;
-      min-height: 72px;
-      max-height: 92px;
+      min-height: 96px;
+      max-height: 120px;
       border: 0;
       border-radius: 16px;
       padding: 12px 14px;
@@ -251,20 +244,6 @@
 
     textarea:focus {
       outline-color: var(--accent);
-    }
-
-    .message-preview {
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.12);
-      color: var(--text);
-      white-space: pre-wrap;
-      min-height: 72px;
-      max-height: 92px;
-      overflow: hidden;
-      font-size: clamp(1rem, 1.25vw, 1.25rem);
-      line-height: 1.2;
-      font-weight: 750;
     }
 
     .checklist-card {
@@ -399,31 +378,24 @@
         <div class="panel mode-card">
           <h2>Modus</h2>
           <div class="modes">
-            <button class="mode-btn active-mode" data-mode="normal">
-              <strong>Vanlig</strong>
-              <span>3 min</span>
-            </button>
             <button class="mode-btn" data-mode="quick">
               <strong>Rask</strong>
               <span>1 min</span>
             </button>
-            <button class="mode-btn" data-mode="clean">
-              <strong>Rydding</strong>
-              <span>5 min</span>
+            <button class="mode-btn active-mode" data-mode="normal">
+              <strong>Vanlig</strong>
+              <span>3 min</span>
             </button>
-            <button class="mode-btn" data-mode="friday">
-              <strong>Helg</strong>
-              <span>4 min</span>
+            <button class="mode-btn" data-mode="careful">
+              <strong>Ekstra nøye</strong>
+              <span>5 min</span>
             </button>
           </div>
         </div>
 
         <div class="panel message-card">
           <h2>Beskjed</h2>
-          <div class="message-row">
-            <textarea id="messageInput" placeholder="Skriv beskjed her..."></textarea>
-            <div class="message-preview" id="messagePreview">Ingen ekstra beskjed.</div>
-          </div>
+          <textarea id="messageInput" placeholder="Skriv beskjed her..."></textarea>
         </div>
 
         <div class="panel checklist-card" id="checklistCard">
@@ -442,6 +414,16 @@
 
   <script>
     const modes = {
+      quick: {
+        seconds: 60,
+        label: "Du har 1 minutt",
+        checklist: [
+          ["🎒", "Pakk sekken", "Ta med det viktigste."],
+          ["📚", "Sjekk lekser", "Se etter beskjeder."],
+          ["🧹", "Rydd", "Sjekk pult og gulv."],
+          ["🙋", "Stå klar", "Vent rolig."]
+        ]
+      },
       normal: {
         seconds: 180,
         label: "Du har 3 minutter",
@@ -454,17 +436,7 @@
           ["🙋", "Stå klar", "Vent rolig bak pulten."]
         ]
       },
-      quick: {
-        seconds: 60,
-        label: "Du har 1 minutt",
-        checklist: [
-          ["🎒", "Pakk sekken", "Ta med det viktigste."],
-          ["📚", "Sjekk lekser", "Se etter beskjeder."],
-          ["🧹", "Rydd", "Sjekk pult og gulv."],
-          ["🙋", "Stå klar", "Vent rolig."]
-        ]
-      },
-      clean: {
+      careful: {
         seconds: 300,
         label: "Du har 5 minutter",
         checklist: [
@@ -473,21 +445,9 @@
           ["📦", "Utstyr", "Legg fellesutstyr tilbake."],
           ["🎒", "Pakk sekken", "Ta med det du trenger hjem."],
           ["📚", "Sjekk lekser", "Lekser, prøver og frister."],
-          ["🧺", "Hylle/skap", "Ta med klær, flasker og bøker."],
+          ["🧺", "Hylle/skap", "Klær, flasker og utstyr."],
           ["🪑", "Stol", "Sett opp eller inn stolen."],
           ["🙋", "Stå klar", "Vent rolig bak pulten."]
-        ]
-      },
-      friday: {
-        seconds: 240,
-        label: "Du har 4 minutter",
-        checklist: [
-          ["🧹", "Rydd godt", "På, under og rundt pulten."],
-          ["🎒", "Pakk hjem", "Ta med alt du trenger."],
-          ["📚", "Neste uke", "Sjekk lekser og frister."],
-          ["🧺", "Hylle/skap", "Klær, flasker og utstyr."],
-          ["🔋", "Lading", "Husk å lade hjemme."],
-          ["🙋", "Stå klar", "God helg når lærer sier det."]
         ]
       }
     };
@@ -505,8 +465,7 @@
     const fullscreenBtn = document.getElementById("fullscreenBtn");
     const soundBtn = document.getElementById("soundBtn");
     const messageInput = document.getElementById("messageInput");
-    const messagePreview = document.getElementById("messagePreview");
-    const finishedCard = document.getElementById("finishedCard");
+        const finishedCard = document.getElementById("finishedCard");
     const checklistCard = document.getElementById("checklistCard");
 
     let currentMode = "normal";
@@ -654,11 +613,6 @@
       setTimeout(() => playTone(440, 0.22), 340);
     }
 
-    function updateMessagePreview() {
-      const text = messageInput.value.trim();
-      messagePreview.textContent = text || "Ingen ekstra beskjed.";
-    }
-
     async function toggleFullscreen() {
       if (!document.fullscreenElement) {
         await document.documentElement.requestFullscreen();
@@ -684,8 +638,6 @@
       if (soundOn) playTone(520, 0.12);
     });
 
-    messageInput.addEventListener("input", updateMessagePreview);
-
     document.addEventListener("keydown", (event) => {
       if (event.code === "Space") {
         event.preventDefault();
@@ -695,12 +647,10 @@
       if (event.key.toLowerCase() === "f") toggleFullscreen();
       if (event.key === "1") setMode("normal");
       if (event.key === "2") setMode("quick");
-      if (event.key === "3") setMode("clean");
-      if (event.key === "4") setMode("friday");
+      if (event.key === "3") setMode("careful");
     });
 
     setMode("normal");
-    updateMessagePreview();
   </script>
 </body>
 </html>
