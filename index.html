@@ -6,10 +6,10 @@
   <title>Avslutningsskjerm</title>
   <style>
     :root {
-      --bg1: #182235;
+      --bg1: #172033;
       --bg2: #263852;
       --card: rgba(255, 255, 255, 0.12);
-      --card-strong: rgba(255, 255, 255, 0.18);
+      --card-strong: rgba(255, 255, 255, 0.19);
       --text: #f7fafc;
       --muted: #d9e2ec;
       --accent: #ffd166;
@@ -24,40 +24,45 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top left, #34506e, var(--bg1) 45%, #101827);
       color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
     }
 
     .app {
-      min-height: 100vh;
-      padding: 28px;
+      width: 100vw;
+      height: 100vh;
+      padding: clamp(10px, 1.2vw, 20px);
       display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: 20px;
+      grid-template-rows: auto 1fr;
+      gap: clamp(10px, 1vw, 16px);
     }
 
     header {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      gap: 14px;
     }
 
     .title-block h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 4vw, 4.5rem);
-      line-height: 1;
+      font-size: clamp(2rem, 3.2vw, 3.7rem);
+      line-height: 0.95;
       letter-spacing: -0.04em;
     }
 
     .title-block p {
-      margin: 8px 0 0;
-      font-size: clamp(1rem, 1.5vw, 1.35rem);
+      margin: 5px 0 0;
+      font-size: clamp(0.95rem, 1.25vw, 1.25rem);
       color: var(--muted);
     }
 
@@ -65,7 +70,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      gap: 10px;
+      gap: 8px;
+      max-width: 520px;
     }
 
     button, input, textarea {
@@ -75,30 +81,26 @@
     button {
       border: 0;
       border-radius: 999px;
-      padding: 12px 18px;
+      padding: 9px 14px;
       background: var(--card-strong);
       color: var(--text);
       cursor: pointer;
-      box-shadow: 0 8px 24px var(--shadow);
+      box-shadow: 0 6px 18px var(--shadow);
       transition: transform 0.15s ease, background 0.15s ease;
       backdrop-filter: blur(10px);
+      font-weight: 700;
+      font-size: clamp(0.85rem, 0.9vw, 1rem);
     }
 
     button:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       background: rgba(255, 255, 255, 0.24);
     }
 
     button.primary {
       background: var(--accent);
       color: #1f2933;
-      font-weight: 800;
-    }
-
-    button.stop {
-      background: var(--danger);
-      color: white;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     button.active-mode {
@@ -107,18 +109,20 @@
     }
 
     main {
+      min-height: 0;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 22px;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(10px, 1.2vw, 18px);
       align-items: stretch;
     }
 
     .panel {
+      min-height: 0;
       background: var(--card);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 32px;
-      padding: 28px;
-      box-shadow: 0 18px 48px var(--shadow);
+      border-radius: clamp(18px, 2vw, 30px);
+      padding: clamp(14px, 1.4vw, 24px);
+      box-shadow: 0 14px 36px var(--shadow);
       backdrop-filter: blur(18px);
     }
 
@@ -128,23 +132,22 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      min-height: 520px;
-      position: relative;
       overflow: hidden;
     }
 
     .timer-label {
-      font-size: clamp(1.2rem, 2vw, 2rem);
+      font-size: clamp(1.1rem, 1.8vw, 2rem);
       color: var(--muted);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      font-weight: 700;
     }
 
     .timer {
-      font-size: clamp(6rem, 15vw, 15rem);
-      line-height: 0.9;
-      font-weight: 900;
+      font-size: clamp(6rem, 14vw, 15rem);
+      line-height: 0.88;
+      font-weight: 950;
       letter-spacing: -0.08em;
-      text-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+      text-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
     }
 
     .timer.warning {
@@ -156,12 +159,12 @@
     }
 
     .progress-wrap {
-      width: min(740px, 90%);
-      height: 24px;
+      width: min(680px, 92%);
+      height: clamp(16px, 1.7vw, 24px);
       background: rgba(255, 255, 255, 0.16);
       border-radius: 999px;
       overflow: hidden;
-      margin: 28px 0 18px;
+      margin: clamp(16px, 2vw, 28px) 0 clamp(10px, 1vw, 16px);
     }
 
     .progress-bar {
@@ -173,97 +176,77 @@
     }
 
     .timer-message {
-      font-size: clamp(1.4rem, 2.4vw, 2.4rem);
-      font-weight: 800;
-      margin-top: 8px;
+      font-size: clamp(1.45rem, 2.7vw, 3rem);
+      font-weight: 900;
+      margin-top: 4px;
+      line-height: 1.05;
     }
 
     .timer-submessage {
-      font-size: clamp(1rem, 1.5vw, 1.35rem);
+      font-size: clamp(1rem, 1.35vw, 1.35rem);
       color: var(--muted);
       margin-top: 8px;
-      max-width: 820px;
+      max-width: 700px;
+      line-height: 1.25;
     }
 
-    .side-grid {
+    .right-grid {
+      min-height: 0;
       display: grid;
       grid-template-rows: auto auto 1fr;
-      gap: 18px;
+      gap: clamp(10px, 1vw, 14px);
     }
 
     .mode-card h2, .checklist-card h2, .message-card h2, .finished-card h2 {
-      margin: 0 0 16px;
-      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+      margin: 0 0 10px;
+      font-size: clamp(1.25rem, 1.9vw, 2.1rem);
+      line-height: 1;
     }
 
     .modes {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
     }
 
     .mode-btn {
-      border-radius: 22px;
-      padding: 16px;
-      text-align: left;
-      min-height: 88px;
+      border-radius: 18px;
+      padding: 12px 10px;
+      text-align: center;
+      min-height: 62px;
     }
 
     .mode-btn strong {
       display: block;
-      font-size: 1.15rem;
-      margin-bottom: 4px;
+      font-size: clamp(0.9rem, 1vw, 1.05rem);
+      margin-bottom: 2px;
+      white-space: nowrap;
     }
 
     .mode-btn span {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: clamp(0.75rem, 0.85vw, 0.9rem);
     }
 
-    .checklist {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .message-row {
       display: grid;
-      gap: 12px;
-    }
-
-    .check-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 14px;
-      align-items: start;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 16px;
-    }
-
-    .icon {
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .check-item strong {
-      display: block;
-      font-size: clamp(1.15rem, 1.8vw, 1.7rem);
-      margin-bottom: 3px;
-    }
-
-    .check-item span {
-      color: var(--muted);
-      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: stretch;
     }
 
     textarea {
       width: 100%;
-      min-height: 120px;
+      min-height: 72px;
+      max-height: 92px;
       border: 0;
-      border-radius: 20px;
-      padding: 18px;
+      border-radius: 16px;
+      padding: 12px 14px;
       color: var(--text);
       background: rgba(0, 0, 0, 0.18);
-      resize: vertical;
+      resize: none;
       outline: 2px solid transparent;
+      font-size: clamp(0.9rem, 1vw, 1.05rem);
     }
 
     textarea:focus {
@@ -271,14 +254,63 @@
     }
 
     .message-preview {
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: 20px;
+      padding: 12px 14px;
+      border-radius: 16px;
       background: rgba(255, 255, 255, 0.12);
       color: var(--text);
       white-space: pre-wrap;
-      min-height: 74px;
-      font-size: clamp(1rem, 1.35vw, 1.3rem);
+      min-height: 72px;
+      max-height: 92px;
+      overflow: hidden;
+      font-size: clamp(1rem, 1.25vw, 1.25rem);
+      line-height: 1.2;
+      font-weight: 750;
+    }
+
+    .checklist-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .checklist {
+      min-height: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(8px, 0.8vw, 12px);
+    }
+
+    .check-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: clamp(10px, 1vw, 14px);
+      min-height: 78px;
+    }
+
+    .icon {
+      font-size: clamp(1.8rem, 2.2vw, 2.4rem);
+      line-height: 1;
+    }
+
+    .check-item strong {
+      display: block;
+      font-size: clamp(1rem, 1.35vw, 1.45rem);
+      margin-bottom: 2px;
+      line-height: 1.05;
+    }
+
+    .check-item span {
+      color: var(--muted);
+      font-size: clamp(0.78rem, 0.95vw, 1.02rem);
+      line-height: 1.18;
+      display: block;
     }
 
     .finished-card {
@@ -288,65 +320,48 @@
     }
 
     .finished-card.visible {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .finished-card .big {
-      font-size: clamp(2rem, 5vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1;
-      margin: 8px 0 12px;
+      font-size: clamp(2rem, 4vw, 4.8rem);
+      font-weight: 950;
+      line-height: 0.95;
+      margin: 8px 0 10px;
     }
 
-    footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+    .finished-card p {
+      margin: 0;
+      font-size: clamp(1rem, 1.4vw, 1.4rem);
       color: var(--muted);
-      font-size: clamp(1rem, 1.3vw, 1.25rem);
-    }
-
-    .footer-tip {
-      padding: 14px 18px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
     }
 
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 1050px) {
-      header, footer {
-        flex-direction: column;
-        align-items: stretch;
+    @media (max-width: 1100px) {
+      html, body {
+        overflow: auto;
+      }
+
+      .app {
+        height: auto;
+        min-height: 100vh;
+      }
+
+      header {
+        grid-template-columns: 1fr;
       }
 
       .top-controls {
         justify-content: flex-start;
+        max-width: none;
       }
 
       main {
-        grid-template-columns: 1fr;
-      }
-
-      .timer-panel {
-        min-height: 420px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .app {
-        padding: 16px;
-      }
-
-      .panel {
-        border-radius: 24px;
-        padding: 18px;
-      }
-
-      .modes {
         grid-template-columns: 1fr;
       }
     }
@@ -357,7 +372,7 @@
     <header>
       <div class="title-block">
         <h1>Avslutning av timen</h1>
-        <p>Gjør deg klar, sjekk at du har det du trenger, og vent rolig på beskjed.</p>
+        <p>Rydd plassen, pakk sekken, sjekk lekser og gjør deg klar.</p>
       </div>
 
       <div class="top-controls" aria-label="Kontroller">
@@ -365,119 +380,114 @@
         <button id="pauseBtn">Pause</button>
         <button id="resetBtn">Nullstill</button>
         <button id="fullscreenBtn">Fullskjerm</button>
-        <button id="soundBtn">Lyd: på</button>
+        <button id="soundBtn">Lyd på</button>
       </div>
     </header>
 
     <main>
       <section class="panel timer-panel" aria-live="polite">
-        <div class="timer-label" id="timerLabel">Du har 3 minutter på å gjøre deg klar</div>
+        <div class="timer-label" id="timerLabel">Du har 3 minutter</div>
         <div class="timer" id="timer">03:00</div>
         <div class="progress-wrap" aria-hidden="true">
           <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="timer-message" id="timerMessage">Start når klassen skal avslutte.</div>
-        <div class="timer-submessage" id="timerSubmessage">Når du er ferdig: stå rolig bak pulten, hjelp sidemannen hvis det trengs, og vent på felles avslutning.</div>
+        <div class="timer-message" id="timerMessage">Gjør deg klar.</div>
+        <div class="timer-submessage" id="timerSubmessage">Når du er ferdig: stå rolig bak pulten.</div>
       </section>
 
-      <section class="side-grid">
+      <section class="right-grid">
         <div class="panel mode-card">
-          <h2>Velg avslutning</h2>
+          <h2>Modus</h2>
           <div class="modes">
             <button class="mode-btn active-mode" data-mode="normal">
               <strong>Vanlig</strong>
-              <span>3 minutter</span>
+              <span>3 min</span>
             </button>
             <button class="mode-btn" data-mode="quick">
               <strong>Rask</strong>
-              <span>1 minutt</span>
+              <span>1 min</span>
             </button>
             <button class="mode-btn" data-mode="clean">
-              <strong>Grundig rydding</strong>
-              <span>5 minutter</span>
+              <strong>Rydding</strong>
+              <span>5 min</span>
             </button>
             <button class="mode-btn" data-mode="friday">
-              <strong>Fredag/helg</strong>
-              <span>4 minutter</span>
+              <strong>Helg</strong>
+              <span>4 min</span>
             </button>
           </div>
         </div>
 
         <div class="panel message-card">
-          <h2>Dagens siste beskjed</h2>
-          <textarea id="messageInput" placeholder="Skriv for eksempel: Husk gymtøy i morgen. Prøve i samfunnsfag på torsdag."></textarea>
-          <div class="message-preview" id="messagePreview">Ingen ekstra beskjed i dag.</div>
+          <h2>Beskjed</h2>
+          <div class="message-row">
+            <textarea id="messageInput" placeholder="Skriv beskjed her..."></textarea>
+            <div class="message-preview" id="messagePreview">Ingen ekstra beskjed.</div>
+          </div>
         </div>
 
         <div class="panel checklist-card" id="checklistCard">
-          <h2>Sjekkliste før du går</h2>
+          <h2>Sjekkliste</h2>
           <ul class="checklist" id="checklist"></ul>
         </div>
 
         <div class="panel finished-card" id="finishedCard">
           <h2>Tiden er ute</h2>
           <div class="big">Stå klar bak pulten</div>
-          <p>Ryddig plass, pakket sekk og lekser sjekket. Takk for i dag!</p>
+          <p>Takk for i dag!</p>
         </div>
       </section>
     </main>
-
-    <footer>
-      <div class="footer-tip">Tips: Legg denne siden på en Stream Deck-knapp og åpne den i fullskjerm.</div>
-      <div class="footer-tip">Ferdig tidlig? Stå rolig, hjelp en medelev eller vent på beskjed.</div>
-    </footer>
   </div>
 
   <script>
     const modes = {
       normal: {
-        name: "Vanlig avslutning",
         seconds: 180,
-        label: "Du har 3 minutter på å gjøre deg klar",
+        label: "Du har 3 minutter",
         checklist: [
-          ["🧹", "Rydd pulten", "Sjekk på pulten, under pulten og rundt pulten."],
-          ["🎒", "Pakk sekken", "Ta med Mac/iPad, lader, bøker, skrivesaker og annet du trenger."],
-          ["📚", "Sjekk lekser", "Se etter lekser, frister, prøver og beskjeder."],
-          ["🪑", "Stol og plass", "Sett opp/inn stolen slik læreren ønsker."],
-          ["🙋", "Stå rolig bak pulten", "Vis at du er klar, og vent på felles beskjed."]
+          ["🧹", "Rydd pulten", "På, under og rundt pulten."],
+          ["🎒", "Pakk sekken", "Ta med det du trenger hjem."],
+          ["📚", "Sjekk lekser", "Se etter lekser, frister og prøver."],
+          ["💻", "Mac/iPad", "Husk enhet og lader."],
+          ["🪑", "Stol", "Sett opp eller inn stolen."],
+          ["🙋", "Stå klar", "Vent rolig bak pulten."]
         ]
       },
       quick: {
-        name: "Rask avslutning",
         seconds: 60,
-        label: "Du har 1 minutt på rask avslutning",
+        label: "Du har 1 minutt",
         checklist: [
-          ["🎒", "Pakk det viktigste", "Mac/iPad, lader og det du trenger hjemme."],
-          ["📚", "Sjekk lekse raskt", "Se etter lekser og viktige beskjeder."],
-          ["🧹", "Rydd rundt deg", "Få bort søppel og utstyr."],
-          ["🙋", "Stå klar", "Vent rolig på beskjed."]
+          ["🎒", "Pakk sekken", "Ta med det viktigste."],
+          ["📚", "Sjekk lekser", "Se etter beskjeder."],
+          ["🧹", "Rydd", "Sjekk pult og gulv."],
+          ["🙋", "Stå klar", "Vent rolig."]
         ]
       },
       clean: {
-        name: "Grundig rydding",
         seconds: 300,
-        label: "Du har 5 minutter på grundig rydding",
+        label: "Du har 5 minutter",
         checklist: [
-          ["🧹", "Rydd pulten helt", "Alt skal bort fra pulten."],
-          ["🔎", "Sjekk gulvet", "Se under og rundt pulten. Plukk opp søppel."],
-          ["📦", "Legg ting på riktig plass", "Hylle, sekk, skap eller felles utstyr."],
-          ["🎒", "Pakk sekken", "Ta med alt du trenger hjemme."],
-          ["📚", "Sjekk lekser og frister", "Se etter lekser, prøver, innleveringer og beskjeder."],
-          ["🪑", "Stol opp/inn", "Gjør plassen klar for neste økt eller neste dag."],
-          ["🙋", "Stå rolig bak pulten", "Vis at du er ferdig og klar."]
+          ["🧹", "Rydd pulten", "Alt skal på riktig plass."],
+          ["🔎", "Sjekk gulvet", "Under og rundt pulten."],
+          ["📦", "Utstyr", "Legg fellesutstyr tilbake."],
+          ["🎒", "Pakk sekken", "Ta med det du trenger hjem."],
+          ["📚", "Sjekk lekser", "Lekser, prøver og frister."],
+          ["🧺", "Hylle/skap", "Ta med klær, flasker og bøker."],
+          ["🪑", "Stol", "Sett opp eller inn stolen."],
+          ["🙋", "Stå klar", "Vent rolig bak pulten."]
         ]
       },
       friday: {
-        name: "Fredag/helg",
         seconds: 240,
-        label: "Du har 4 minutter på helgesjekk",
+        label: "Du har 4 minutter",
         checklist: [
-          ["🧹", "Rydd plassen godt", "På, under og rundt pulten."],
-          ["🎒", "Ta med riktig utstyr hjem", "Mac/iPad, lader, bøker, gymtøy og annet som ikke skal ligge igjen."],
-          ["📚", "Sjekk lekser for neste uke", "Se etter frister, prøver og innleveringer."],
-          ["🧺", "Ta med klær og flasker", "Sjekk hylle, skap og garderobe."],
-          ["🔋", "Husk lading", "Sørg for at Mac/iPad lades før neste skoledag."],
-          ["🙋", "Stå rolig bak pulten", "Klar for felles avslutning og god helg."]
+          ["🧹", "Rydd godt", "På, under og rundt pulten."],
+          ["🎒", "Pakk hjem", "Ta med alt du trenger."],
+          ["📚", "Neste uke", "Sjekk lekser og frister."],
+          ["🧺", "Hylle/skap", "Klær, flasker og utstyr."],
+          ["🔋", "Lading", "Husk å lade hjemme."],
+          ["🙋", "Stå klar", "God helg når lærer sier det."]
         ]
       }
     };
@@ -529,7 +539,6 @@
       timerEl.textContent = formatTime(remainingSeconds);
       const percent = Math.max(0, (remainingSeconds / totalSeconds) * 100);
       progressBar.style.width = `${percent}%`;
-
       timerEl.classList.toggle("warning", remainingSeconds <= 30 && remainingSeconds > 0);
       timerEl.classList.toggle("done", remainingSeconds === 0);
     }
@@ -540,8 +549,8 @@
       totalSeconds = modes[mode].seconds;
       remainingSeconds = totalSeconds;
       timerLabelEl.textContent = modes[mode].label;
-      timerMessageEl.textContent = "Start når klassen skal avslutte.";
-      timerSubmessageEl.textContent = "Når du er ferdig: stå rolig bak pulten, hjelp sidemannen hvis det trengs, og vent på felles avslutning.";
+      timerMessageEl.textContent = "Gjør deg klar.";
+      timerSubmessageEl.textContent = "Når du er ferdig: stå rolig bak pulten.";
       finishedCard.classList.remove("visible");
       checklistCard.classList.remove("hidden");
 
@@ -562,8 +571,8 @@
         setTimeout(() => playTone(660, 0.12), 150);
       }
 
-      timerMessageEl.textContent = "Nå avslutter vi rolig og effektivt.";
-      timerSubmessageEl.textContent = "Jobb deg gjennom sjekklisten. Når du er ferdig, står du rolig bak pulten.";
+      timerMessageEl.textContent = "Jobb rolig og effektivt.";
+      timerSubmessageEl.textContent = "Følg sjekklisten. Stå klar når du er ferdig.";
 
       intervalId = setInterval(() => {
         remainingSeconds--;
@@ -596,8 +605,8 @@
     function resetTimer() {
       stopTimer();
       remainingSeconds = totalSeconds;
-      timerMessageEl.textContent = "Start når klassen skal avslutte.";
-      timerSubmessageEl.textContent = "Når du er ferdig: stå rolig bak pulten, hjelp sidemannen hvis det trengs, og vent på felles avslutning.";
+      timerMessageEl.textContent = "Gjør deg klar.";
+      timerSubmessageEl.textContent = "Når du er ferdig: stå rolig bak pulten.";
       finishedCard.classList.remove("visible");
       checklistCard.classList.remove("hidden");
       renderTimer();
@@ -610,7 +619,7 @@
       playEndSound();
       timerLabelEl.textContent = "Tiden er ute";
       timerMessageEl.textContent = "Stå klar bak pulten.";
-      timerSubmessageEl.textContent = "Takk for innsatsen. Vent rolig på lærerens siste beskjed.";
+      timerSubmessageEl.textContent = "Vent rolig på siste beskjed.";
       finishedCard.classList.add("visible");
     }
 
@@ -626,16 +635,13 @@
     function playTone(frequency = 520, duration = 0.15) {
       if (!soundOn) return;
       unlockAudio();
-
       const oscillator = audioContext.createOscillator();
       const gain = audioContext.createGain();
-
       oscillator.type = "sine";
       oscillator.frequency.value = frequency;
       gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.12, audioContext.currentTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.11, audioContext.currentTime + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + duration);
-
       oscillator.connect(gain);
       gain.connect(audioContext.destination);
       oscillator.start();
@@ -650,7 +656,7 @@
 
     function updateMessagePreview() {
       const text = messageInput.value.trim();
-      messagePreview.textContent = text || "Ingen ekstra beskjed i dag.";
+      messagePreview.textContent = text || "Ingen ekstra beskjed.";
     }
 
     async function toggleFullscreen() {
@@ -674,7 +680,7 @@
 
     soundBtn.addEventListener("click", () => {
       soundOn = !soundOn;
-      soundBtn.textContent = soundOn ? "Lyd: på" : "Lyd: av";
+      soundBtn.textContent = soundOn ? "Lyd på" : "Lyd av";
       if (soundOn) playTone(520, 0.12);
     });
 
